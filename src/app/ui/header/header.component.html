@@ -1,0 +1,26 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand" href="/">Angular & Bootstrap</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">Home</a>
+      <a class="nav-item nav-link" routerLink="/country" routerLinkActive="active" href="#">Country</a>
+      <a class="nav-item nav-link" routerLink="/person" routerLinkActive="active" href="#">Person</a>
+      <a class="nav-item nav-link" routerLink="/address" routerLinkActive="active" href="#">Address</a>
+      <a class="nav-item nav-link" routerLink="/lifecycle" routerLinkActive="active" href="#">LifeCycle</a>
+      <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active" href="#">Register</a>
+    </div>
+  </div>
+  <div class="navbar-expand ml-auto navbar-nav">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#" (click)="logout()">Logout
+        <!--<i class="fa fa-github"></i>-->
+      </a>
+      <a class="nav-item nav-link" href="https://twitter.com/beeman_nl" target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+      <a class="nav-item nav-link" href="https://medium.com/@beeman" target="_blank">
+        <i class="fa fa-medium"></i>
+      </a>
+    </div>
+  </div>
+</nav>

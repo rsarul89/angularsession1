@@ -1,0 +1,57 @@
+<form novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <fieldset formGroupName="name">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" formControlName="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName">
+    </div>
+  </fieldset>
+
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" formControlName="email">
+    <div *ngIf="submitted && email.errors" class="invalid-feedback">
+      <div *ngIf="email.errors.required">Email is required</div>
+    </div>
+    <pre>Dirty? {{ registerForm.controls.email.dirty }}</pre>
+    <pre>Pristine? {{ registerForm.controls.email.pristine }}</pre>
+    <pre>Touched? {{ registerForm.controls.email.touched }}</pre>
+    <pre>Valid? {{ registerForm.controls.email.valid }}</pre>
+    <pre>Invalid? {{ registerForm.controls.email.invalid }}</pre>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" formControlName="password">
+    <div *ngIf="submitted && password.errors" class="invalid-feedback">
+      <div *ngIf="password.errors.required">Password is required</div>
+    </div>
+    <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+      <p *ngIf="password.errors.required">Password is required</p>
+      <p *ngIf="password.errors.minlength">Password must be {{password.errors.minlength.requiredLength}} characters long, we need another {{password.errors.minlength.requiredLength
+        - password.errors.minlength.actualLength}} characters </p>
+    </div>
+
+    <pre>{{ password.errors | json }}</pre>
+    </div>
+
+    <div class="form-group">
+      <label for="language">Language</label>
+      <select class="form-control" formControlName="language">
+      <option value="">Please select a language</option>
+      <option *ngFor="let lang of langs"
+              [value]="lang">{{lang}}
+      </option>
+    </select>
+    </div>
+
+    <pre>{{registerForm.value | json}}</pre>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
