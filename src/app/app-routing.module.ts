@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'person',
     loadChildren: './person/person.module#PersonModule',
-    data: { preload: false, delay: true, delayDuration: 2000 },
+    data: { preload: true, delay: true, delayDuration: 2000 },
     canActivate: [AuthGuard]
   },
   {

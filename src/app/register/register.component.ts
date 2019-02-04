@@ -13,63 +13,65 @@ import {
 export class RegisterComponent implements OnInit {
 
   langs: string[] = ["English", "French", "German"];
-  registerForm: FormGroup;
+  myform: FormGroup;
   submitted = false;
-  // firstName: FormControl;
-  // lastName: FormControl;
-  // email: FormControl;
-  // password: FormControl;
-  // language: FormControl;
+  firstName: FormControl;
+  lastName: FormControl;
+  email: FormControl;
+  password: FormControl;
+  language: FormControl;
 
   constructor(private formBuilder: FormBuilder) { }
 
-  // createFormControls() {
-  //   this.firstName = new FormControl("", Validators.required);
-  //   this.lastName = new FormControl("", Validators.required);
-  //   this.email = new FormControl("", [
-  //     Validators.required,
-  //     Validators.pattern("[^ @]*@[^ @]*")
-  //   ]);
-  //   this.password = new FormControl("", [
-  //     Validators.required,
-  //     Validators.minLength(8)
-  //   ]);
-  //   this.language = new FormControl("", Validators.required);
-  // }
+  createFormControls() {
+    this.firstName = new FormControl("", Validators.required);
+    this.lastName = new FormControl("", Validators.required);
+    this.email = new FormControl("", [
+      Validators.required,
+      Validators.pattern("[^ @]*@[^ @]*")
+    ]);
+    this.password = new FormControl("", [
+      Validators.required,
+      Validators.minLength(8)
+    ]);
+    this.language = new FormControl("", Validators.required);
+  }
+  // convenience getter for easy access to form fields
+  get f() { return this.myform.controls; }
 
   createForm() {
-    this.registerForm = this.formBuilder.group({
-      name: this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required]
-      }),
-      email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      language: ['', Validators.required]
-    });
-
-    // this.myform = new FormGroup({
-    //   name: new FormGroup({
-    //     firstName: this.firstName,
-    //     lastName: this.lastName
+    // this.registerForm = this.formBuilder.group({
+    //   name: this.formBuilder.group({
+    //     firstName: ['', Validators.required],
+    //     lastName: ['', Validators.required]
     //   }),
-    //   email: this.email,
-    //   password: this.password,
-    //   language: this.language
+    //   email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+    //   password: ['', [Validators.required, Validators.minLength(8)]],
+    //   language: ['', Validators.required]
     // });
+
+    this.myform = new FormGroup({
+      name: new FormGroup({
+        firstName: this.firstName,
+        lastName: this.lastName
+      }),
+      email: this.email,
+      password: this.password,
+      language: this.language
+    });
   }
 
   ngOnInit() {
-    //this.createFormControls();
+    this.createFormControls();
     this.createForm();
   }
 
   onSubmit() {
      this.submitted = true;
-    if (this.registerForm.valid) {
+    if (this.myform.valid) {
       console.log("Form Submitted!");
-      console.log(this.registerForm.value);
-      this.registerForm.reset();
+      console.log(this.myform.value);
+      this.myform.reset();
     }
   }
 }

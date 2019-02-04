@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Auth } from '../auth';
 import { AuthService } from '../auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
   private user: Auth;
   subscription: Subscription;
   constructor(public router: Router, public authService: AuthService) {
@@ -21,5 +21,7 @@ export class AuthGuard implements CanActivate {
     }
     this.subscription.unsubscribe();
     return true;
+  }
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
   }
 }

@@ -41,6 +41,7 @@ export class LifeCycleComponentComponent implements
   }
 
   ngDoCheck() {
+    console.clear();
     console.log(this.data);
     console.log("ngDoCheck")
   }
