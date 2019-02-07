@@ -6,3 +6,10 @@
     padding-right: 0.20rem !important;
     padding-left: 0.20rem !important;
 }
+.fa-heart {
+  color:black;
+}
+.navbar{
+    -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}

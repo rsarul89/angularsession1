@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PersonService } from '../services/person.service';
+//import { PersonService } from '../services/person.service';
 import { Person } from '../models/person';
-
 
 @Component({
   selector: 'app-person-list',
@@ -11,10 +11,10 @@ import { Person } from '../models/person';
 })
 export class PersonListComponent implements OnInit {
 
-  persons$: Observable<Person[]>;
-  constructor(private personService: PersonService) {}
+  persons$: any;
+  constructor(private route: ActivatedRoute) { }
   ngOnInit() {
-      this.persons$ = this.personService.getPersons();
-  }	
-
+    this.persons$ = this.route.snapshot.data;
+    //this.persons$ = this.personService.getPersons();
+  }
 }

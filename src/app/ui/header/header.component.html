@@ -2,12 +2,14 @@
   <a class="navbar-brand" href="/">Angular & Bootstrap</a>  
   <div class="navbar-expand mr-auto">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">Home</a>
+      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       <a class="nav-item nav-link" routerLink="/country" routerLinkActive="active" href="#">Country</a>
       <a class="nav-item nav-link" routerLink="/person" routerLinkActive="active" href="#">Person</a>
       <a class="nav-item nav-link" routerLink="/address" routerLinkActive="active" href="#">Address</a>
       <a class="nav-item nav-link" routerLink="/lifecycle" routerLinkActive="active" href="#">LifeCycle</a>
       <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active" href="#">Register</a>
+      <a class="nav-item nav-link" routerLink="/form-builder" routerLinkActive="active" href="#">FormBuilder</a>
+      <a class="nav-item nav-link" routerLink="/dyn-form" routerLinkActive="active" href="#">Dynamic Form Control</a>
     </div>
   </div>
   <div class="navbar-expand ml-auto navbar-nav">

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { delay } from "rxjs/operators";
 import { Person } from '../models/person';
 
 const PERSONS: Person[] = [
@@ -15,6 +16,8 @@ export class PersonService {
   constructor() { }
 
   getPersons(): Observable<Person[]> {
-    return personList$;
+    //return personList$.pipe(delay(3000));
+     return personList$;
+    //return of([]);
   }
 }

@@ -4,6 +4,7 @@ import { PersonComponent }  from './person.component';
 import { PersonListComponent }  from './person-list/person-list.component';
 import { PersonService } from './services/person.service';
 import { PersonRoutingModule }  from './person-routing.module';
+import { PersonResolveService } from './services/person-resolve.service';
 
 @NgModule({
   imports: [     
@@ -14,7 +15,7 @@ import { PersonRoutingModule }  from './person-routing.module';
 		PersonComponent,
 		PersonListComponent
   ],
-  providers: [ PersonService ]
+  providers: [ PersonService, PersonResolveService ]
 })
 export class PersonModule { 
   constructor() {

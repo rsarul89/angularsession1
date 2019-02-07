@@ -4,6 +4,8 @@ import { AppComponent, HomeComponent, PageNotFoundComponent, SharedModule, AppRo
 import { SqrtPipe } from './sqrt.pipe';
 import { LifeCycleComponentComponent } from './life-cycle-component.component';
 import { RegisterComponent } from './register/register.component';
+import { FormbuliderComponent } from './formbulider.component';
+import { DynamicFormControlComponent } from './dynamic-form-control.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { RegisterComponent } from './register/register.component';
     PageNotFoundComponent,
     SqrtPipe,
     LifeCycleComponentComponent,
-    RegisterComponent
+    RegisterComponent,
+    FormbuliderComponent,
+    DynamicFormControlComponent
   ],
   imports: [
     BrowserModule,

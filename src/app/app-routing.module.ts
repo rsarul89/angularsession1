@@ -5,6 +5,8 @@ import { CustomPreloadingWithDelayStrategy } from './custom-preloading-with-dela
 import { HomeComponent } from './home/home.component';
 import { LifeCycleComponentComponent } from './life-cycle-component.component';
 import { RegisterComponent } from './register/register.component';
+import { FormbuliderComponent } from './formbulider.component';
+import { DynamicFormControlComponent } from './dynamic-form-control.component';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
@@ -15,6 +17,14 @@ const routes: Routes = [
   {
     path: 'lifecycle',
     component: LifeCycleComponentComponent
+  },
+  {
+    path: 'form-builder',
+    component: FormbuliderComponent
+  },
+  {
+    path: 'dyn-form',
+    component: DynamicFormControlComponent
   },
   {
     path: 'register',

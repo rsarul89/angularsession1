@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
+    <input type="checkbox" [formControlName]="i">
+    {{orders[i].name}}
+  </label>
+
+  <div *ngIf="!form.valid">At least one order must be selected</div>
+  <button [disabled]="!form.valid" class="btn btn-info btn-sm">submit</button>
+</form>
+
+<form [formGroup]="orderForm" (ngSubmit)="submit1()">
+  <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div [formGroupName]="i">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" placeholder="Item name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input formControlName="description" placeholder="Item name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input formControlName="price" placeholder="Item name" class="form-control">
+      </div>
+    </div>
+    <button class="btn btn-info btn-sm" [disabled]="orderForm.controls.items.controls.length <= 1" (click)="deleteOrderItem(i)">Delete Order Item</button>   
+     {{ orderForm.controls.items.controls[i].value | json }}
+    <br/>
+    <br/>
+  </div>
+  <button class="btn btn-info btn-sm">submit</button>
+</form>
+<br/>
+<button class="btn btn-info btn-sm" (click)="addItem()">Add New</button>
+
+<!--<form [formGroup]="orderForm" (ngSubmit)="submit1()">
+  <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div class="form-group" [formGroupName]="i">
+      <label for="username">{{i}}</label>
+      <input formControlName="name" placeholder="Item name" class="form-control">
+      <input formControlName="description" placeholder="Item description" class="form-control">
+      <input formControlName="price" placeholder="Item price" class="form-control">
+    </div>
+  </div>
+</form>
+
+Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }}-->
