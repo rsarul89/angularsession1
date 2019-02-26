@@ -7,6 +7,9 @@ import { LifeCycleComponentComponent } from './life-cycle-component.component';
 import { RegisterComponent } from './register/register.component';
 import { FormbuliderComponent } from './formbulider.component';
 import { DynamicFormControlComponent } from './dynamic-form-control.component';
+import { FacetFilterComponent } from './facet-filter.component';
+import { FacetFilter2Component } from './facet-filter2.component';
+import { UserComponent } from './user.component';
 import { AuthGuard } from './guards';
 
 const routes: Routes = [
@@ -19,12 +22,24 @@ const routes: Routes = [
     component: LifeCycleComponentComponent
   },
   {
+    path: 'user',
+    component: UserComponent
+  },
+  {
     path: 'form-builder',
     component: FormbuliderComponent
   },
   {
     path: 'dyn-form',
     component: DynamicFormControlComponent
+  },
+  {
+    path: 'facet',
+    component: FacetFilterComponent
+  },
+  {
+    path: 'facet2',
+    component: FacetFilter2Component
   },
   {
     path: 'register',

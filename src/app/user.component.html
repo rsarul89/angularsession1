@@ -1,0 +1,22 @@
+<h3>User List</h3>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.Id}}</td>
+            <td>{{user.Name}}</td>
+            <td>{{user.Sex}}</td>
+            <td>{{user.Email}}</td>
+            <td><button type="button"(click)="Post(user)" class="btn btn-md btn-info">Post</button></td>
+        </tr>
+    </tbody>
+</table>
+<!--{{ users | json }}-->

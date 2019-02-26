@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
+  <label formArrayName="orders" *ngFor="let order of form['controls']['orders']['controls']; let i = index">
     <input type="checkbox" [formControlName]="i">
     {{orders[i].name}}
   </label>
@@ -9,7 +9,7 @@
 </form>
 
 <form [formGroup]="orderForm" (ngSubmit)="submit1()">
-  <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+  <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
     <div [formGroupName]="i">
       <div class="form-group">
         <label for="name">Name</label>
@@ -24,8 +24,8 @@
         <input formControlName="price" placeholder="Item name" class="form-control">
       </div>
     </div>
-    <button class="btn btn-info btn-sm" [disabled]="orderForm.controls.items.controls.length <= 1" (click)="deleteOrderItem(i)">Delete Order Item</button>   
-     {{ orderForm.controls.items.controls[i].value | json }}
+    <button class="btn btn-info btn-sm" [disabled]="orderForm['controls']['items']['controls'].length <= 1" (click)="deleteOrderItem(i)">Delete Order Item</button>   
+     {{ orderForm['controls']['items']['controls'][i].value | json }}
     <br/>
     <br/>
   </div>

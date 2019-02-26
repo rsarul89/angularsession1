@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Search results for "{{searchTerm}}" ({{ (filterItems| searchfilter: 'Heading':searchTerm).length}})</h2>
+    <p>Search:
+      <input id="search-input" type="text" placeholder="Search" name="q" [(ngModel)]="searchTerm">
+    </p>
+  </div>
+</div>
+<div class="row controls-sorting">
+  <div class="sorting col-sm-6"> <span class="title">Sort by:</span>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default btn-xs" (click)="setOrder('2', 'Brand', false)" [ngClass]="{active: sorting.id  === '2'}">Name A-Z</button>
+      <button type="button" class="btn btn-default btn-xs" (click)="setOrder('3', 'Brand', true)" [ngClass]="{active: sorting.id  === '3'}">Name Z-A</button>
+      <button type="button" class="btn btn-default btn-xs" (click)="setOrder('4', 'Price', false)" [ngClass]="{active: sorting.id  === '4'}">Price Low-High</button>
+      <button type="button" class="btn btn-default btn-xs" (click)="setOrder('5', 'Price', true)" [ngClass]="{active: sorting.id  === '5'}">Price High-Low</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <aside class="searchfilters col-sm-3">
+    <div class="facets">
+      <section class="facetgroup" *ngIf="filterItems.length > 0">
+        <h4>Brands</h4>
+        <!-- works but haven't found a way to abstract it to make it scalable for multiple filter groups  -->
+        <ng-template *ngIf="(filterItems | searchfilter:'Heading':searchTerm)">
+          <div *ngFor="let brand of brandsGroup; let i = index;">
+            <label class="checkbox">
+            <input type="checkbox"  [(ngModel)]="useBrands[brand]" (change)="checked()" [value]="brand" />
+            {{brand}} <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Brand: brand} : filterItems : false).length }})</span> </label>
+          </div>
+        </ng-template>
+        <span [hidden]="maxBrands>=6" class="link" (click)="maxBrands = 100">More</span>
+        <span [hidden]="maxBrands<=5" class="link" (click)="maxBrands = 5">Less</span>
+      </section>
+      <section class="facetgroup" *ngIf="filterItems.length > 0">
+        <h4>Labels</h4>
+        <div>
+          <!--- Not working correctly, ideally this should be iterated rather than hardcoded and the count doesn't match if there are multiple values in the array -->
+          <label class="checkbox">
+                        <input type="checkbox" [(ngModel)]="filters.Label['New Product']" />
+                        New Product <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Labels: 'New'} : filterItems : false).length }})</span> </label>
+          <label class="checkbox">
+                        <input type="checkbox" [(ngModel)]="filters.Label['As Advertised']" />
+                        As Advertised <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Labels: 'As Advertised'} : filterItems : false).length }})</span> </label>
+          <label class="checkbox">
+                        <input type="checkbox" [(ngModel)]="filters.Label['Bargain Buy']" />
+                        Bargain Buy <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Labels: 'Bargain Buy'} : filterItems : false).length }})</span> </label>
+        </div>
+      </section>
+      <section class="facetgroup" *ngIf="filterItems.length > 0">
+        <h4>Callouts</h4>
+        <div>
+          <!--- Not working correctly -->
+          <label class="checkbox">
+                        <input type="checkbox"  [(ngModel)]="filters.Callout['Sale']" />
+                        Sale <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Callout: 'Sale'} : filterItems : false).length }})</span> </label>
+          <label class="checkbox">
+                        <input type="checkbox"  [(ngModel)]="filters.Callout['Clearance']" />
+                        Clearance <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Callout: 'Clearance'} : filterItems : false).length }})</span> </label>
+          <label class="checkbox">
+                        <input type="checkbox"  [(ngModel)]="filters.Callout['Bonus Offer']" />
+                        Bonus Offer <span>({{ (filterItems | searchfilter:'Heading':searchTerm | filter: { Callout: 'Bonus Offer'} : filterItems : false).length }})</span> </label>
+        </div>
+      </section>
+    </div>
+  </aside>
+</div>
+<div class="productlist grid col-sm-9 clearfix">
+  <article *ngFor="let product of filterItems | searchfilter:'Heading':searchTerm; let i = index;" id="{{product.Sku}}" class="product col-sm-4">
+    <b class="decor" [class.hide]="!product.Labels[0]" [class.show]="product.Labels[0]">{{product.Labels[0]}}</b>
+    <b class="decor" [class.show]="!product.Labels[0] && product.Callout[0]" [class.hide]="product.Labels[0] && !product.Callout[0]">{{product.Callout[0]}}</b>
+    <div class="inner-content">
+      <a class="thumb" href="#/product/{{product.Sku}}"> <img src="http://placehold.it/180x180"> </a>
+      <div class="clearfix">
+        <h4 class="productname"><a href="#/product/{{product.Sku}}">{{product.Brand}} {{product.Heading}}</a></h4>
+        <div class="price"><sup>$</sup><span>{{product.Price}}</span>
+          <div *ngIf="product.WasPrice > 0 && product.WasPrice > product.Price" class="wasprice">was $<span>{{product.WasPrice}}</span> </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<!--<div class="form">
+  <div *ngFor="let brand of brandsGroup; let i = index;" class="form-check" style="padding-right:20px;">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="useBrands[brand]" (change)="checked()" [value]="brand"> {{brand}}
+    </label>
+  </div>
+</div>-->
+
+<!--<pre>Selected items: <span *ngFor="let filterItem of filterItems" style="padding-right:10px;">{{ filterItem.Heading }}</span></pre>-->
+
+
+<!--<ul>
+  <li *ngFor="let item of PRODUCTS | filter: { Brand: ''} : filterItems : false">{{ item.Brand }} - {{ item.Heading }}</li>
+  <li *ngFor="let item of filterItems">{{ item.Brand }} - {{ item.Heading }}</li>
+</ul>-->

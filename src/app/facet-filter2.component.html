@@ -1,0 +1,41 @@
+<!-- Heading Title -->
+<h4 class="app-heading">Select Available Products Below:</h4>
+<div class="row">
+  <div class="col-sm-4">
+    <!-- Search Field -->
+    <div>
+      <div class="filter-wrap">
+        <input [(ngModel)]="searchText" placeholder="Filter Products" class="filter-input">
+        <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
+      </div>
+    </div>
+    <!-- Clear Link -->
+    <div class="clear-selection" title="Click to Clear Selections" (click)="clearSelection()" *ngIf="selected_brand_count > 0">Clear Selection</div>
+
+    <!-- Brand List -->
+    <ul class="brand-list">
+      <li *ngFor="let brand of brandsGroup | filter2 : searchText; let i = index;" class="brand-item">
+        <input (change)="getSelected(brand)" type="checkbox" [value]="brand" [(ngModel)]="useBrands[brand]" />
+        <span class="brand-text">{{brand}}</span>
+      </li>
+    </ul>
+
+    <!-- Selected Brands-->
+    <div class="selected-brands-wrap">
+      <div class="selected-brand" *ngFor="let s of selected_brands">
+        <span>{{s}} <span class="delete-brand" (click)="deleteBrand(s)" title="Click to delete">X</span></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-8">
+    <ng-template [ngIf]="selected_products.length > 0" [ngIfElse]="notfound">
+      <ul>
+        <li *ngFor="let product of selected_products">{{ product.Brand }} - {{ product.Heading }}</li>
+      </ul>
+    </ng-template>
+    <ng-template #notfound>
+      <div>No products found!</div>
+    </ng-template>
+  </div>
+</div>
